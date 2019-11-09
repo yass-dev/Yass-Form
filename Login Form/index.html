@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact Form</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+	</head>
+	<body>
+		<div class="contactFormContainer">
+			<p class="contactTitle">Yass Login Form</p>
+			<p class="errorMessage"></p>
+			<fieldset class="fit contactFieldset">
+				<form class="w100 contactForm" id="contactForm" method="post" action="test.php" autocomplete="off">
+					<div class="flex-column w100" id="slide0">
+						<div class="group">      
+						    <input autocomplete="off" type="text" class="inp" id="loginEmail" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Email</label></label>
+						</div>
+						<p class="email-forgotten">E-mail address forgotten ?</p>
+					</div>
+					<div class="flex-column w100" id="slide1">
+						<div class="group">      
+						    <input autocomplete="off" type="password" class="inp" id="loginPassword" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Password</label></label>
+						</div>
+						<p class="password-forgotten">Password forgotten ?</p>
+					</div>
+					<div class="flex-column w100" id="slide2">
+						<div class="group">      
+						    <input autocomplete="off" type="tel" class="inp" id="loginPhone" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Phone</label></label>
+						</div>
+					</div>
+					<div class="flex-column w100" id="slide3">
+						<div class="group">      
+						    <p class="password-restore">We have send <span class="loginType">an email</span> to <span class="loginVal"></span> to restore your password.</p>
+						</div>
+					</div>
+					<div class="flex-column w100" id="slide4">
+						<div class="group">      
+						    <p class="password-restore">Hello <span class="loginVal"></span> your are connected</p>
+						</div>
+					</div>
+				</form>
+				<div id="submitButton" stat="email">Next</div>
+			</fieldset>
+		</div>
+
+		<script type="text/javascript">
+
+			var login;
+			var isPhone;
+
+			$('.errorMessage').slideUp();
+
+			$('#contactDescription').on('focus', function ()
+			{
+				var style = $(this).attr('style'),
+				textbox = $(document.createElement('textarea')).attr('style', style).addClass("inp autoExpand").attr('id', 'contactDescription');
+				textbox.attr('data-min-rows', '2');
+				$(this).replaceWith(textbox);
+				textbox.focus();
+				textbox.css('width', '300px');
+			});
+
+			$('textarea.autoExpand').on('focusout', function()
+			{
+				$(this).parent().find('label').css({top: '0px', color: '#999'});
+			});
+
+			$('textarea.autoExpand').change(function()
+			{
+				console.log("change");
+			});
+
+			$('#submitButton').mouseenter(function()
+			{
+				$(this).animate({'background-color' : 'white', 'color' : '#1a73e8', 'font-size' : '19px'}, 200);
+			});
+			$('#submitButton').mouseleave(function()
+			{
+				$(this).animate({'background-color' : '#1a73e8', 'color' : 'white', 'font-size' : '18px'}, 200);
+			});
+			
+			$(document).one('focus.autoExpand', 'textarea.autoExpand', function()
+			{
+        		var savedValue = this.value;
+        		this.value = '';
+        		this.baseScrollHeight = this.scrollHeight;
+        		this.value = savedValue;
+    		}).on('input.autoExpand', 'textarea.autoExpand', function()
+    		{
+        		var minRows = this.getAttribute('data-min-rows')|0, rows;
+        		this.rows = minRows;
+        		rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 18);
+        		this.rows = minRows + rows;
+    		});
+
+    		$(".email-forgotten").on('click', function()
+    		{
+    			$(".errorMessage").slideUp();
+    			$('#slide0').animate({'opacity': 0}, 500, function()
+				{
+					$(this).css({'display': 'none'});
+					$('#slide2').css({'display': 'block', 'opacity' : 0});
+					$('#slide2').animate({'opacity': 1}, 500);
+				});
+				$('#submitButton').attr('stat', 'forgotten-email');
+				$('#submitButton').text("Next");
+				isPhone = true;
+    		});
+
+    		$(".password-forgotten").on('click', function()
+    		{
+    			$(".errorMessage").slideUp();
+    			if(!isPhone)
+    			{
+    				$(".loginType").text("an email");
+    			}
+    			else
+    			{
+    				$(".loginType").text("a message");
+    			}
+    			$(".loginVal").text(login);
+    			$('#slide1').animate({'opacity': 0}, 500, function()
+				{
+					$(this).css({'display': 'none'});
+					$('#slide3').css({'display': 'block', 'opacity' : 0});
+					$('#slide3').animate({'opacity': 1}, 500);
+				});
+				$('#submitButton').attr('stat', 'forgotten-password');
+				$('#submitButton').text("Continue");
+    		});
+
+			$('#submitButton').on('click', function()
+			{
+				if($(this).attr('stat') == "email")
+				{
+					if(verifEmail($('#loginEmail').val()))
+					{
+						$('.errorMessage').slideUp();
+						$('#slide0').animate({'opacity': 0}, 500, function()
+						{
+							$(this).css({'display': 'none'});
+							$('#slide1').css({'display': 'block', 'opacity' : 0});
+							$('#slide1').animate({'opacity': 1}, 500);
+						});
+						$(this).attr('stat', "password");
+						$(this).text("Log In");
+						login = $('#loginEmail').val();
+					}
+					else
+					{
+						$('.errorMessage').text('Email invalid');
+						$('.errorMessage').slideDown();
+					}
+				}
+				else if($(this).attr('stat') == "password")
+				{
+					var receiver = $('#contactForm').attr('action');
+
+					$('#submit').attr('disabled', 'disabled');
+
+					$.post(receiver,
+					{
+						email: login,
+						password: $('#loginPassword').val()
+					},
+					function(data)
+					{
+						$('#submitButton').removeAttr('disabled');
+						if(data == 'success')
+						{
+							$('#slide1').animate({'opacity': 0}, 500, function()
+							{
+								$(this).css({'display': 'none'});
+								$('.errorMessage').slideUp('').text("");
+								$('#slide4').css({'display': 'block', 'opacity' : 0});
+								$('#slide4').animate({'opacity': 1}, 500);
+								$('#submitButton').text("Continue");
+								$(".loginVal").text(login);
+							});
+						}
+						else
+						{
+							$('.errorMessage').text(data);
+							$('.errorMessage').slideDown('slow');
+						}
+					});
+				}
+				else if($(this).attr('stat') == "forgotten-email")
+				{
+					if(verifPhone($('#loginPhone').val()))
+					{
+						$('.errorMessage').slideUp();
+						$('#slide2').animate({'opacity': 0}, 500, function()
+						{
+							$(this).css({'display': 'none'});
+							$('#slide1').css({'display': 'block', 'opacity' : 0});
+							$('#slide1').animate({'opacity': 1}, 500);
+						});
+						$('#submitButton').attr('stat', "password");
+						$('#submitButton').text("Log In");
+						login = $('#loginPhone').val();
+					}
+					else
+					{
+						$('.errorMessage').text('Phone invalid !');
+						$('.errorMessage').slideDown();
+					}
+				}
+				else if($(this).attr('stat') == "forgotten-password")
+				{
+					$('.errorMessage').slideUp();
+
+					$('#slide3').animate({'opacity': 0}, 500, function()
+					{
+						$(this).css({'display': 'none'});
+						$('#slide0').css({'display': 'block', 'opacity' : 0});
+						$('#slide0').animate({'opacity': 1}, 500);
+					});
+					$('#submitButton').attr('stat', "email");
+					$('#submitButton').text("Continue");
+				}
+	
+			});
+
+			function verifEmail(email)
+			{
+				if(email.includes('@') && email.includes('.'))
+				{
+					var name = email.split('@')[0];
+					var domain = email.split('@')[1].split('.')[0];
+					var ext = email.split('@')[1].split('.')[1];
+
+					if(name == "" || domain == "" || ext == "")
+					{
+						return false;
+					}
+					else
+					{
+						return true;
+					}
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+			function verifPhone(phone)
+			{
+				var valid = /^\d{10}$/;
+				if(phone.match(valid))
+				{
+					return true;
+				}
+				else
+				{
+					return false;
+				}
+			}
+
+		</script>
+	</body>
+</html>

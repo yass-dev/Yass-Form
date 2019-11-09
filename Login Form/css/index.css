@@ -1,0 +1,433 @@
+.flex-column
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex
+{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.required-field
+{
+	color: red;
+}
+
+.w100
+{
+	width: 100%;
+}
+
+.w90
+{
+	width: 90%;
+}
+
+.w80
+{
+	width: 80%;
+}
+
+.w70
+{
+	width: 70%;
+}
+
+.w60
+{
+	width: 60%;
+}
+
+.w50
+{
+	width: 50%;
+}
+
+.w45
+{
+	width: 45%;
+}
+
+.w40
+{
+	width: 40%;
+}
+
+.w30
+{
+	width: 30%;
+}
+
+.w20
+{
+	width: 20%;
+}
+
+.w10
+{
+	width: 10%;
+}
+
+.contactForm
+{
+	justify-content: space-around;
+	line-height: 40px;
+	display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+}
+
+.w40
+{
+	width: 40%;
+}
+
+.contactTitle
+{
+	font-size: 30px;
+	font-weight: bold;
+	color: #616161;
+	text-align: center;
+}
+
+.contactFormContainer
+{
+	height: auto;
+    width: 32%;
+    min-width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	padding-top: 48px;
+    padding-right: 40px;
+    padding-bottom: 36px;
+    padding-left: 40px;
+    border: 1px solid #dadce0;
+}
+
+.contactForm .fit
+{
+	height: fit-content;
+}
+
+body
+{
+	height: 100vh;
+	width: 100vw;
+}
+
+.contactLegend
+{
+	font-size: 18px;
+	border: solid 1px rgb(220, 220, 220);
+	font-weight: bold;
+	padding-top: 7px;
+    padding-right: 10px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.space-between
+{
+	justify-content: space-between;
+}
+
+.space-around
+{
+    justify-content: space-around;
+}
+
+.contactFieldset
+{
+	border: none;
+}
+
+#submitButton
+{
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: #1a73e8;
+    border: solid 1px #1a73e8;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 32px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.group
+{ 
+  	position:relative; 
+  	margin-bottom:45px; 
+}
+
+.inp
+{
+  	font-size: 18px;
+  	padding: 10px 10px 10px 5px;
+  	display: block;
+  	width: 300px;
+  	border: none;
+  	border-bottom: 1px solid #757575;
+}
+
+.inp:focus
+{
+	outline:none;
+}
+
+.label
+{
+  	color:#999; 
+  	font-size:18px;
+  	font-weight:normal;
+  	position:absolute;
+  	pointer-events:none;
+  	left:5px;
+  	top:10px;
+  	transition:0.2s ease all; 
+  	-moz-transition:0.2s ease all; 
+  	-webkit-transition:0.2s ease all;
+}
+
+.inp:focus ~ .label, .inp:valid ~ .label
+{
+  	top: -20px;
+  	font-size: 14px;
+  	color: #1a73e8;
+}
+
+.bar
+{
+	position: relative;
+	display: block;
+	width: 315px;
+}
+
+.bar:before, .bar:after
+{
+  	content:'';
+  	height:2px; 
+  	width:0;
+  	bottom:1px; 
+  	position:absolute;
+  	background:#1a73e8; 
+  	transition:0.2s ease all; 
+  	-moz-transition:0.2s ease all; 
+  	-webkit-transition:0.2s ease all;
+}
+.bar:before
+{
+  	left:50%;
+}
+.bar:after
+{
+  	right:50%; 
+}
+
+/* active state */
+.inp:focus ~ .bar:before, .inp:focus ~ .bar:after
+{
+  	width:50%;
+}
+
+.highlight
+{
+  	position:absolute;
+  	height:60%; 
+  	width:100px; 
+  	top:25%; 
+  	left:0;
+  	pointer-events:none;
+  	opacity:0.5;
+}
+
+.inp:focus ~ .highlight
+{
+  	-webkit-animation:input.inpHighlighter 0.3s ease;
+  	-moz-animation:input.inpHighlighter 0.3s ease;
+  	animation:input.inpHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes input.inpHighlighter
+{
+	from
+	{
+		background:#1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+@-moz-keyframes input.inpHighlighter
+{
+	from
+	{
+		background: #1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+@keyframes input.inpHighlighter
+{
+	from
+	{ 
+		background: #1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+
+textarea#contactDescription
+{
+	width: 400px;
+}
+
+.line-flex
+{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 20px;
+	padding-right: 20px;
+	justify-content: space-between;
+}
+
+.__container
+{
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 18px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.__container input
+{
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+ 
+.checkmark
+{
+  position: absolute;
+  top: 7px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+  border-radius: 50%;
+  border: solid 1px #1a73e8;
+}
+
+.__container:hover input ~ .checkmark
+{
+  background-color: #ccc;
+}
+
+.__container input:checked ~ .checkmark
+{
+  	background-color: #1a73e8;
+}
+
+.checkmark:after
+{
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.__container input:checked ~ .checkmark:after
+{
+  display: block;
+}
+
+.__container .checkmark:after
+{
+ 	top: 7px;
+    left: 7px;
+    width: 7px;
+    height: 7px;
+	border-radius: 50%;
+	background: white;
+}
+
+.errorMessage
+{
+	color: red;
+}
+
+#slide1, #slide2, #slide3, #slide4
+{
+    display: none;
+}
+
+.email-forgotten
+{
+    color: #1a73e8;
+    display: block;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: inherit;
+    outline: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.password-forgotten
+{
+    color: #1a73e8;
+    display: block;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: inherit;
+    outline: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.password-restore
+{
+    color: #1a73e8;
+    display: block;
+    font-weight: bold;
+    letter-spacing: 0.25px;
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    font-size: inherit;
+    outline: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.loginVal
+{
+    color: orange;
+}

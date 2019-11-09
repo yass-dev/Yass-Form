@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact Form</title>
+		<script src="js/jquery-3.4.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+	</head>
+	<body>
+		<div class="contactFormContainer w40">
+			<p class="contactTitle">Comment Form</p>
+			<p class="errorMessage"></p>
+			<fieldset class="fit contactFieldset">
+				<legend class="contactLegend">Please complet all fields</legend>
+				<form class="contactForm" id="contactForm" method="post" action="test.php">
+					<div class="flex w100 space-between">
+						<div class="group">      
+						    <input autocomplete="off" type="text" class="inp" id="contactName" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Name</label></label>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="group">      
+						    <input autocomplete="off" type="mail" class="inp" id="contactEmail" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Email</label></label>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="group">      
+						    <input autocomplete="off" type="tel" class="inp" id="contactPhone" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">Phone</label></label>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="group">
+						    <input autocomplete="off" type="text" class="inp" id="contactComment" required>
+						    <span class="highlight"></span>
+							<span class="bar"></span>
+						  	<label class="label">Your description</label></label>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="group">      
+						    <input autocomplete="off" type="tel" class="inp" id="calcul" required>
+						    <span class="highlight"></span>
+						    <span class="bar"></span>
+							<label class="label">6 + 3</label></label>
+						</div>
+					</div>
+				</form>
+				<div class="submitButton" onclick="sendForm();">Submit</div>
+			</fieldset>
+		</div>
+
+		<script type="text/javascript">
+
+			$('#contactComment').on('focus', function ()
+			{
+				var style = $(this).attr('style'),
+				textbox = $(document.createElement('textarea')).attr('style', style).addClass("inp autoExpand").attr('id', 'contactComment');
+				textbox.attr('data-min-rows', '2');
+				$(this).replaceWith(textbox);
+				textbox.focus();
+				textbox.css('width', '300px');
+			});
+
+			$('textarea.autoExpand').on('focusout', function()
+			{
+				$(this).parent().find('label').css({top: '0px', color: '#999'});
+			});
+
+			$('textarea.autoExpand').change(function()
+			{
+				console.log("change");
+			});
+
+			$(document).one('focus.autoExpand', 'textarea.autoExpand', function()
+			{
+        		var savedValue = this.value;
+        		this.value = '';
+        		this.baseScrollHeight = this.scrollHeight;
+        		this.value = savedValue;
+    		}).on('input.autoExpand', 'textarea.autoExpand', function()
+    		{
+        		var minRows = this.getAttribute('data-min-rows')|0, rows;
+        		this.rows = minRows;
+        		rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 18);
+        		this.rows = minRows + rows;
+    		});
+
+    		$('.submitButton').mouseenter(function()
+			{
+				$(this).animate({'background-color' : 'white', 'color' : '#1a73e8', 'font-size' : '19px'}, 200);
+			});
+			$('.submitButton').mouseleave(function()
+			{
+				$(this).animate({'background-color' : '#1a73e8', 'color' : 'white', 'font-size' : '18px'}, 200);
+			});
+
+			function sendForm()
+			{
+				var receiver = $('#contactForm').attr('action');
+
+				$('#submit').attr('disabled', 'disabled');
+
+				$.post(receiver,
+				{
+					name: $('#contactName').val(),
+					email: $('#contactEmail').val(),
+					phone: $('#contactPhone').val(),
+					comment: $('#contactComment').val(),
+					calcul: $('#calcul').val()
+				},
+				function(data)
+				{
+					$('.errorMessage').val(data);
+					$('.submitButton').removeAttr('disabled');
+					if(data == 'success')
+					{
+						$('.contactFormContainer').slideUp('slow');
+					}
+					else
+					{
+						$('.errorMessage').slideDown('slow');
+						$('.errorMessage').text(data);
+					}
+				});
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,329 @@
+.flex-column
+{
+	display: flex;
+	flex-direction: column;
+}
+
+.flex
+{
+	display: flex;
+}
+
+.required-field
+{
+	color: red;
+}
+
+.w100
+{
+	width: 100%;
+}
+
+.w90
+{
+	width: 90%;
+}
+
+.w80
+{
+	width: 80%;
+}
+
+.w70
+{
+	width: 70%;
+}
+
+.w60
+{
+	width: 60%;
+}
+
+.w50
+{
+	width: 50%;
+}
+
+.w40
+{
+	width: 40%;
+}
+
+.w30
+{
+	width: 30%;
+}
+
+.w20
+{
+	width: 20%;
+}
+
+.w10
+{
+	width: 10%;
+}
+
+
+.contactForm
+{
+	width: 80%;
+	justify-content: space-around;
+	line-height: 40px;
+	display: flex;
+    flex-direction: column;
+}
+
+.w40
+{
+	width: 40%;
+}
+
+.contactTitle
+{
+	font-size: 30px;
+	font-weight: bold;
+	color: #333333;
+}
+
+.contactForm #contactComment
+{
+	width: 300px;
+	height: 80px;
+    padding: 5px;
+    color: #666;
+    background: #f4f4f4;
+    margin: 5px 0;
+    border: solid 1px #ccc;
+    border-radius: 4px;
+}
+
+.contactFormContainer
+{
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5%;
+	padding-right: 5%;
+	padding-left: 5%;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.contactForm .fit
+{
+	height: fit-content;
+}
+
+body
+{
+	height: 100vh;
+	width: 100vw;
+}
+
+.contactLegend
+{
+	font-size: 18px;
+	border: solid 1px rgb(26, 115, 232);
+	color: rgb(26, 115, 232);
+	font-weight: bold;
+	padding-top: 7px;
+    padding-right: 10px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    border-radius: 5px;
+}
+
+.contactInput
+{
+	width: 300px;
+	height: 25px;
+    padding: 5px;
+    color: #666;
+    background: #f4f4f4;
+    margin: 5px 0;
+    border: solid 1px #ccc;
+    border-radius: 4px;
+}
+
+.space-between
+{
+	justify-content: space-between;
+}
+
+.contactFieldset
+{
+	border: 1px solid rgb(26, 115, 232);
+	padding-top: 40px;
+}
+
+.submitButton
+{
+	margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    width: 100px;
+    height: 35px;
+    background-color: #1a73e8;
+    border: solid 1px #1a73e8;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 32px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.submitButton:hover
+{
+	background-color: #444444;
+}
+
+.contactForm label
+{
+	font-size: 18px;
+}
+
+.errorMessage
+{
+	display: none;
+	color: red;
+	font-size: 15px;
+	height: 20px;
+}
+
+.group
+{ 
+  	position:relative; 
+  	margin-bottom:45px; 
+}
+
+.inp
+{
+  	font-size: 18px;
+  	padding: 10px 10px 10px 5px;
+  	display: block;
+  	width: 300px;
+  	border: none;
+  	border-bottom: 1px solid #757575;
+}
+
+.inp:focus
+{
+	outline:none;
+}
+
+.label
+{
+  	color:#999; 
+  	font-size:18px;
+  	font-weight:normal;
+  	position:absolute;
+  	pointer-events:none;
+  	left:5px;
+  	top:10px;
+  	transition:0.2s ease all; 
+  	-moz-transition:0.2s ease all; 
+  	-webkit-transition:0.2s ease all;
+}
+
+.inp:focus ~ .label, .inp:valid ~ .label
+{
+  	top: -20px;
+  	font-size: 14px;
+  	color: #1a73e8;
+}
+
+.bar
+{
+	position: relative;
+	display: block;
+	width: 315px;
+}
+
+.bar:before, .bar:after
+{
+  	content:'';
+  	height:2px; 
+  	width:0;
+  	bottom:1px; 
+  	position:absolute;
+  	background:#1a73e8; 
+  	transition:0.2s ease all; 
+  	-moz-transition:0.2s ease all; 
+  	-webkit-transition:0.2s ease all;
+}
+.bar:before
+{
+  	left:50%;
+}
+.bar:after
+{
+  	right:50%; 
+}
+
+/* active state */
+.inp:focus ~ .bar:before, .inp:focus ~ .bar:after
+{
+  	width:50%;
+}
+
+.highlight
+{
+  	position:absolute;
+  	height:60%; 
+  	width:100px; 
+  	top:25%; 
+  	left:0;
+  	pointer-events:none;
+  	opacity:0.5;
+}
+
+.inp:focus ~ .highlight
+{
+  	-webkit-animation:input.inpHighlighter 0.3s ease;
+  	-moz-animation:input.inpHighlighter 0.3s ease;
+  	animation:input.inpHighlighter 0.3s ease;
+}
+
+@-webkit-keyframes input.inpHighlighter
+{
+	from
+	{
+		background:#1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+@-moz-keyframes input.inpHighlighter
+{
+	from
+	{
+		background: #1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+@keyframes input.inpHighlighter
+{
+	from
+	{ 
+		background: #1a73e8;
+	}
+  	to 
+  	{
+  		width:0;
+  		background:transparent;
+  	}
+}
+
+textarea#contactComment
+{
+	width: 400px;
+}

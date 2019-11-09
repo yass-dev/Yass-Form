@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Contact Form</title>
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
+	</head>
+	<body>
+		<div class="contactFormContainer w45">
+			<p class="contactTitle">Yass Register Form</p>
+			<p class="errorMessage"></p>
+			<fieldset class="fit contactFieldset">
+				<form class="w100 contactForm" id="contactForm" method="post" action="test.php">
+					<div class="flex w100 space-between">
+						<div class="line-flex">
+							<div class="group">      
+						      	<input autocomplete="off" type="text" class="inp" id="contactFirstName" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">First Name</label></label>
+						    </div>
+						    <div class="group">      
+						      	<input autocomplete="off" type="text" class="inp" id="contactLastName" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">Last Name</label></label>
+						    </div>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="line-flex">
+							<label for="male" style="font-size: 18px; color: #999;">Gender :</label> 
+							<div class="flex space-between" style="width: 50%;">
+								<div>
+									<label class="__container">Male
+									  	<input autocomplete="off" type="radio" name="gender" id="male" checked>
+									  	<span class="checkmark"></span>
+									</label>
+								</div>
+
+								<div>
+									<label class="__container">Female
+									  	<input autocomplete="off" type="radio" name="gender" id="female">
+									  	<span class="checkmark"></span>
+									</label>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="line-flex">
+							<div class="group">      
+						      	<input autocomplete="off" type="text" class="inp" id="contactEmail" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">Email</label></label>
+						    </div>
+						    <div class="group">      
+						      	<input autocomplete="off" type="text" class="inp" id="contactPhone" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">Phone</label></label>
+						    </div>
+						</div>
+					</div>
+					<div class="flex w100 space-between">
+						<div class="line-flex">
+							<div class="group">
+						      	<input autocomplete="off" type="text" class="inp" id="contactDescription" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">Your description</label></label>
+						    </div>
+						    <div class="group">
+						      	<input autocomplete="off" type="password" class="inp" id="contactPassword" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">Password</label></label>
+						    </div>
+						    <div class="group">      
+						      	<input autocomplete="off" type="text" class="inp" id="calcul" required>
+						      	<span class="highlight"></span>
+						      	<span class="bar"></span>
+						      	<label class="label">6+7</label></label>
+						    </div>
+						</div>
+					</div>
+				</form>
+				<div class="submitButton" onclick="sendForm();">Submit</div>
+			</fieldset>
+		</div>
+
+		<script type="text/javascript">
+			$('#contactDescription').on('focus', function ()
+			{
+				var style = $(this).attr('style'),
+				textbox = $(document.createElement('textarea')).attr('style', style).addClass("inp autoExpand").attr('id', 'contactDescription');
+				textbox.attr('data-min-rows', '2');
+				$(this).replaceWith(textbox);
+				textbox.focus();
+				textbox.css('width', '300px');
+			});
+
+			$('textarea.autoExpand').on('focusout', function()
+			{
+				$(this).parent().find('label').css({top: '0px', color: '#999'});
+			});
+
+			$('textarea.autoExpand').change(function()
+			{
+				console.log("change");
+			});
+
+			$('.submitButton').mouseenter(function()
+			{
+				$(this).animate({'background-color' : 'white', 'color' : '#1a73e8', 'font-size' : '19px'}, 200);
+			});
+			$('.submitButton').mouseleave(function()
+			{
+				$(this).animate({'background-color' : '#1a73e8', 'color' : 'white', 'font-size' : '18px'}, 200);
+			});
+			
+			$(document).one('focus.autoExpand', 'textarea.autoExpand', function()
+			{
+        		var savedValue = this.value;
+        		this.value = '';
+        		this.baseScrollHeight = this.scrollHeight;
+        		this.value = savedValue;
+    		}).on('input.autoExpand', 'textarea.autoExpand', function()
+    		{
+        		var minRows = this.getAttribute('data-min-rows')|0, rows;
+        		this.rows = minRows;
+        		rows = Math.ceil((this.scrollHeight - this.baseScrollHeight) / 18);
+        		this.rows = minRows + rows;
+    		});
+
+    		function sendForm()
+			{
+				var receiver = $('#contactForm').attr('action');
+
+				$('#submit').attr('disabled', 'disabled');
+
+				$.post(receiver,
+					{
+						firstName: $('#contactFirstName').val(),
+						lastName: $('#contactLastName').val(),
+						gender: $('input[name="gender"]:checked').attr('id'),
+						email: $('#contactEmail').val(),
+						phone: $('#contactPhone').val(),
+						description: $('#contactDescription').val(),
+						password: $('#contactPassword').val(),
+						calcul: $('#calcul').val()
+					},
+					function(data)
+					{
+						$('.errorMessage').val(data);
+						$('.submitButton').removeAttr('disabled');
+						if(data == 'success')
+						{
+							$('#contactForm').slideUp('slow');
+							$('.errorMessage').text('');
+						}
+						else
+						{
+							$('.errorMessage').slideDown('slow');
+							$('.errorMessage').text(data);
+						}
+					});
+			}
+		</script>
+	</body>
+</html>
